@@ -7,7 +7,7 @@ nvidia-smi
 
 # git
 apt-get update && apt-get install -y git wget curl
-( cd ~ && git clone https://github.com/github/CodeSearchNet.git && mv CodeSearchNet proj )
+git clone git@github.com:HaoranZhuExplorer/NYU-CS-GY-6613-proj3.git $HOME/proj
 
 # dataset ~3G
 # In this project you will focus only on Python language
@@ -16,7 +16,7 @@ aria2c -x 16 -s 16 --dir=/dev/shm https://s3.amazonaws.com/code-search-net/CodeS
 mkdir -p /dev/shm/data
 unzip /dev/shm/python.zip -d /dev/shm/data
 command rm /dev/shm/python.zip
-ln -s /dev/shm/data $HOME/proj/resources/data
+ln -s /dev/shm/data $HOME/proj/code/resources/data
 
 # conda
 apt-get update && apt-get install -y aria2
@@ -63,11 +63,11 @@ python -c 'import tensorflow as tf; print(tf.__version__);'
 LC_ALL=C.UTF-8 LANG=C.UTF-8 wandb login
 
 # program
-( cd ~/proj/src && conda activate proj && python train.py --testrun )
+( cd $HOME/proj/code/src && conda activate proj && python train.py --testrun )
 
 # run
 (
-cd ~/proj/src
+cd $HOME/proj/code/src
 conda activate proj
 python train.py \
     --model selfatt ../trained_models \
