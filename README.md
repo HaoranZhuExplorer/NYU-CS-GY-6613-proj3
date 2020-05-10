@@ -1,8 +1,8 @@
 # NYU-CS-GY-6613-proj3
----
+
 # Full Project Report
 
-Please see [AI Project 3 Report](/AI_Project3_Report.pdf)
+Please see [AI Project 3 Report](https://github.com/HaoranZhuExplorer/NYU-CS-GY-6613-proj3/blob/master/AI%20project%203%20Report.pdf)
 
 # Summary
 
