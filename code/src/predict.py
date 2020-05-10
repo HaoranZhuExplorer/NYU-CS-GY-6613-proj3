@@ -72,6 +72,16 @@ def query_model(query, model, indices, language, topk=100):
 
 
 if __name__ == '__main__':
+    # suppress deprecation warning
+    from tensorflow.python.util import deprecation
+    deprecation._PRINT_DEPRECATION_WARNINGS = False
+    try:
+        from tensorflow.python.util import module_wrapper
+        module_wrapper._PER_MODULE_WARNING_LIMIT = 0
+    except ImportError:
+        from tensorflow.python.util import deprecation_wrapper
+        deprecation_wrapper._PER_MODULE_WARNING_LIMIT = 0
+    
     args = docopt(__doc__)
     
     queries = pd.read_csv('../resources/queries.csv')
@@ -113,7 +123,7 @@ if __name__ == '__main__':
         hyper_overrides={})
     
     predictions = []
-    for language in ('python', 'go', 'javascript', 'java', 'php', 'ruby'):
+    for language in ('python',):
         print("Evaluating language: %s" % language)
         definitions = pickle.load(open('../resources/data/{}_dedupe_definitions_v2.pkl'.format(language), 'rb'))
         indexes = [{'code_tokens': d['function_tokens'], 'language': d['language']} for d in tqdm(definitions)]

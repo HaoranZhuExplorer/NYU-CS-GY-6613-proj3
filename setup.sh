@@ -16,6 +16,7 @@ aria2c -x 16 -s 16 --dir=/dev/shm https://s3.amazonaws.com/code-search-net/CodeS
 mkdir -p /dev/shm/data
 unzip /dev/shm/python.zip -d /dev/shm/data
 command rm /dev/shm/python.zip
+# mv /dev/shm/python.zip $HOME
 ln -s /dev/shm/data $HOME/proj/code/resources/data
 
 # conda
@@ -39,7 +40,7 @@ conda install -y tensorflow-gpu='1.*'
 conda clean -y --all
 pip --no-cache-dir install --upgrade \
     altair==3.2.0 \
-    annoy==1.16.0 \
+    annoy==1.16.* \
     docopt==0.6.2 \
     dpu_utils==0.1.34 \
     ipdb==0.12.2 \
@@ -75,3 +76,6 @@ python train.py \
     ../resources/data/python/final/jsonl/valid \
     ../resources/data/python/final/jsonl/test
 )
+
+# predict
+python predict.py --wandb_run_id liqi0816/CodeSearchNet/2nvjacrm
