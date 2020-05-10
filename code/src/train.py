@@ -188,11 +188,14 @@ def run(arguments, tag_in_vcs=False) -> None:
 
 if __name__ == '__main__':
     # suppress deprecation warning
+    from tensorflow.python.util import deprecation
+    deprecation._PRINT_DEPRECATION_WARNINGS = False
     try:
-        from tensorflow.python.util import module_wrapper as deprecation
+        from tensorflow.python.util import module_wrapper
+        module_wrapper._PER_MODULE_WARNING_LIMIT = 0
     except ImportError:
-        from tensorflow.python.util import deprecation_wrapper as deprecation
-    deprecation._PER_MODULE_WARNING_LIMIT = 0
+        from tensorflow.python.util import deprecation_wrapper
+        deprecation_wrapper._PER_MODULE_WARNING_LIMIT = 0
 
     args = docopt(__doc__)
     run_and_debug(lambda: run(args), args['--debug'])
